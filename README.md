@@ -22,8 +22,8 @@ A highly modular, event-driven backtesting framework for Python. Built for moder
 Clone the repository and install the requirements:
 
 ```bash
-git clone https://github.com/yourusername/jay_backtest_engine.git
-cd jay_backtest_engine
+git clone https://github.com/jayantrana88/backtesting_engine.git
+cd backtest_engine
 python -m venv venv
 # On Windows: venv\Scripts\activate
 # On Mac/Linux: source venv/bin/activate
