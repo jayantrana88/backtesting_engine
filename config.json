@@ -1,0 +1,25 @@
+{
+    "data": {
+        "source": "csv",
+        "csv_file_path": "data\\sample_data.csv",
+        "symbol": "SAMPLE",
+        "exchange": "NSE",
+        "from_date": "2024-01-01",
+        "to_date": "2024-03-31",
+        "timeframe": "2h"
+    },
+    "portfolio": {
+        "initial_cash": 100000,
+        "max_active_positions": 5
+    },
+    "risk_management": {
+        "position_sizing_pct_of_equity": 25,
+        "overall_stoploss_amount": 5000,
+        "takeprofit_amount": 0
+    },
+    "simulation": {
+        "brokerage_fee_pct": 0.01,
+        "slippage_pct": 0.01,
+        "allow_fractional_shares": true
+    }
+}

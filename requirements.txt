@@ -1,0 +1,8 @@
+kiteconnect==5.2.0
+selenium==4.0.0
+pyotp==2.9.0
+webdriver-manager>=4.0.0
+python-dotenv==1.2.2
+pandas==3.0.3
+pandas_ta==0.4.71b0
+plotly>=5.18.0
