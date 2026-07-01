@@ -1,4 +1,4 @@
-# 📈 Jay's Algorithmic Backtest Engine
+# Algorithmic Backtest Engine
 
 A highly modular, event-driven backtesting framework for Python. Built for modern quantitative traders, this engine prioritizes an intuitive **decorator-based API**, realistic execution simulation, and **institutional-grade reporting** through TradingView-style interactive HTML dashboards.
 
@@ -9,7 +9,7 @@ A highly modular, event-driven backtesting framework for Python. Built for moder
 - **Decorator-Based Strategy API**: Write clean, declarative strategies without wrestling with rigid class inheritance. Just tag your methods with `@Indicator`, `@BuyCondition`, or `@TrailingStop`.
 - **Event-Driven Realism**: Simulates execution bar-by-bar to realistically handle slippage, brokerage fees, and intra-bar conflict resolution (e.g., when Stop-Loss and Take-Profit are hit on the same candle).
 - **Interactive HTML Reports**: Generates a self-contained, TradingView-style interactive HTML chart (using Plotly) that you can pan and zoom. No more static Matplotlib images.
-- **Institutional Metrics**: Automatically calculates 30+ performance metrics including Calmar Ratio, Omega Ratio, Sortino Ratio, and Statistical Significance (t-Stats & p-Values).
+- **Institutional Metrics**: Automatically calculates 28+ performance metrics including Calmar Ratio, Omega Ratio, Sortino Ratio, and Statistical Significance (t-Stats & p-Values).
 - **Fractional Shares & Crypto Support**: Toggle `allow_fractional_shares` in the config to seamlessly switch between traditional equities and cryptocurrency markets.
 - **Robust Data Handling**: Out-of-the-box support for local CSV files (with auto-header detection) and the Zerodha Kite API.
 
