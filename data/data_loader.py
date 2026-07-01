@@ -48,9 +48,65 @@ class DataLoader:
             return None
 
     def _load_from_zerodha(self):
-        """Placeholder for loading data from Zerodha."""
-        print("NOTICE: Zerodha data loading is not fully implemented yet.")
-        return None
+        """Loads data from Zerodha based on config settings."""
+        print("Loading data from Zerodha...")
+        symbol = self.data_config.get("symbol")
+        exchange = self.data_config.get("exchange", "NSE")
+        from_date = self.data_config.get("from_date")
+        to_date = self.data_config.get("to_date")
+        
+        if not all([symbol, from_date, to_date]):
+            print("Error: 'symbol', 'from_date', and 'to_date' are required in config for Zerodha.")
+            return None
+            
+        # Determine appropriate fetch interval based on timeframe
+        # We fetch raw data and rely on _resample_data to aggregate it up
+        tf = self.data_config.get("timeframe", "5min").lower()
+        if "d" in tf:
+            fetch_interval = "day"
+        elif "h" in tf or int(''.join(filter(str.isdigit, tf)) or 0) >= 60:
+            fetch_interval = "60minute"
+        elif "min" in tf and int(''.join(filter(str.isdigit, tf)) or 0) >= 15:
+            fetch_interval = "15minute"
+        else:
+            fetch_interval = "5minute" # safe default for intraday
+
+        try:
+            client = Zerodha()
+            token = client.get_access_token()
+            if not token:
+                print("Failed to authenticate with Zerodha.")
+                return None
+                
+            instruments = client.instrument_token(exchange)
+            if not instruments:
+                print(f"Failed to fetch instruments for exchange {exchange}.")
+                return None
+                
+            # Find the token for the requested symbol
+            inst_df = pd.DataFrame(instruments)
+            matched = inst_df[inst_df['tradingsymbol'] == symbol]
+            if matched.empty:
+                print(f"Symbol {symbol} not found in exchange {exchange}.")
+                return None
+                
+            inst_token = matched.iloc[0]['instrument_token']
+            
+            # Fetch historical data
+            df = client.fetch_historical_data(inst_token, from_date, to_date, fetch_interval)
+            
+            if df is not None and not df.empty:
+                # Standardize date column for resampling
+                if 'date' in df.columns:
+                    df.rename(columns={'date': 'timestamp'}, inplace=True)
+                return df
+            else:
+                print("No data returned from Zerodha.")
+                return None
+                
+        except Exception as e:
+            print(f"Error integrating with Zerodha: {e}")
+            return None
 
     def _resample_data(self, df):
         """
