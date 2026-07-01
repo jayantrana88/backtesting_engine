@@ -1,4 +1,4 @@
-# 📈 Jay's Algorithmic Backtest Engine
+# Algorithmic Backtest Engine
 
 A highly modular, event-driven backtesting framework for Python. Built for modern quantitative traders, this engine prioritizes an intuitive **decorator-based API**, realistic execution simulation, and **institutional-grade reporting** through TradingView-style interactive HTML dashboards.
 
